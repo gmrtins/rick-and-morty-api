@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    let caractersVC = CaractersViewController()
+    let charactersVC = CharactersViewController()
     let aboutVC = AboutViewController()
     
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class MainViewController: UITabBarController {
     }
     
     func configureUITabBarItems() {
-        caractersVC.tabBarItem = UITabBarItem(title: "Characters", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
+        charactersVC.tabBarItem = UITabBarItem(title: "Characters", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
         aboutVC.tabBarItem = UITabBarItem(title: "About", image: UIImage(systemName: "info.circle"), selectedImage: UIImage(systemName: "info.circle.fill"))
     }
     
@@ -28,7 +28,7 @@ class MainViewController: UITabBarController {
         tabBar.tintColor = UIColor(hex: "#FF1493")
         
         tabBar.barTintColor = .gray
-        setViewControllers([caractersVC, aboutVC], animated: true)
+        setViewControllers([charactersVC, aboutVC], animated: true)
         let appearance = UITabBarAppearance()
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance
