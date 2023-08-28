@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class AboutViewController: UIViewController {
+    // MARK: - UI Elements
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()

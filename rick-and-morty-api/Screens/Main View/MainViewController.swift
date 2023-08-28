@@ -8,29 +8,29 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    let charactersVC = CharactersViewController()
+    let charactersVC = CharactersViewController(viewModel: CharactersViewModel())
     let aboutVC = AboutViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        configureUITabBarItems()
+        configureTabBarItems()
         configureTabBar()
     }
-    
-    func configureUITabBarItems() {
-        charactersVC.tabBarItem = UITabBarItem(title: "Characters", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
-        aboutVC.tabBarItem = UITabBarItem(title: "About", image: UIImage(systemName: "info.circle"), selectedImage: UIImage(systemName: "info.circle.fill"))
-    }
-    
+        
     func configureTabBar() {
-        tabBar.tintColor = UIColor(hex: "#FF1493")
+        tabBar.tintColor = UIColor(hex: "#7cf448")
         
         tabBar.barTintColor = .gray
         setViewControllers([charactersVC, aboutVC], animated: true)
         let appearance = UITabBarAppearance()
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+    }
+    
+    func configureTabBarItems() {
+        charactersVC.tabBarItem = UITabBarItem(title: "Characters", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
+        aboutVC.tabBarItem = UITabBarItem(title: "About", image: UIImage(systemName: "info.circle"), selectedImage: UIImage(systemName: "info.circle.fill"))
     }
 }
