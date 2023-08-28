@@ -15,6 +15,12 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
     let mainView = UIView()
     let titleLabel = UILabel()
     var searchBar = UISearchBar()
+    
+    let loadingIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        return indicator
+    }()
+
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Variables
@@ -38,14 +44,16 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         searchBar.delegate = self
         
         setupView()
-        setupCollectionView()
         setupConstraints()
+        
         viewModel.onDataUpdated = { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
+                self?.loadingIndicator.stopAnimating()
+                self?.setupCollectionView()
             }
         }
-        
+        loadingIndicator.startAnimating()
         viewModel.fetchData()
     }
     
@@ -60,6 +68,9 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.font = .boldSystemFont(ofSize: 25)
         titleLabel.numberOfLines = 2
+        
+        mainView.addSubview(loadingIndicator)
+
         mainView.addSubview(titleLabel)
         mainView.addSubview(searchBar)
         
@@ -82,6 +93,10 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.left.right.equalToSuperview().inset(10)
+        }
+        
+        loadingIndicator.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
