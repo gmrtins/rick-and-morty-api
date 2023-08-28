@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import UIKit
 import SDWebImage
+import UIKit
 
 class AboutViewController: UIViewController {
     // MARK: - UI Elements
@@ -87,8 +87,6 @@ class AboutViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: "backColor")
         mainView.backgroundColor = UIColor(named: "backColor")
-        
-        
     }
     
     private func setupConstraints() {
@@ -111,7 +109,6 @@ class AboutViewController: UIViewController {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
-
         }
         linktreeLabel.snp.makeConstraints { make in
             make.top.equalTo(descriptionLabel.snp.bottom)
@@ -123,5 +120,4 @@ class AboutViewController: UIViewController {
             make.bottom.equalToSuperview().offset(-20)
         }
     }
-    
 }

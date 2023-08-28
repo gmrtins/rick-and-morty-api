@@ -24,7 +24,7 @@ class ClickableLabel: UILabel {
         isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openLink))
         addGestureRecognizer(tapGesture)
-        
+
         font = UIFont.systemFont(ofSize: 16)
     }
 
