@@ -10,6 +10,8 @@ import SnapKit
 import UIKit
 
 class CharacterCollectionViewCell: UICollectionViewCell {
+    // MARK: - Variables
+
     static let reuseIdentifier: String = "CharacterCollectionViewCell"
     
     private let mainView = UIView()
@@ -18,6 +20,8 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     private let opacityLayer = UIView()
     private let genderLabel = UILabel()
     private let statusLabel = UILabel()
+
+    // MARK: - Initialization
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +46,8 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         opacityLayer.backgroundColor = .black
     }
     
+    // MARK: - Functions
+
     private func setupConstraints() {
         mainView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -68,7 +74,6 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         
         genderLabel.snp.makeConstraints { make in
             make.right.equalTo(statusLabel.snp.left).offset(-5)
-//            make.bottom.equalToSuperview().inset(6.9)
             make.centerY.equalTo(statusLabel.snp.centerY)
         }
     }
@@ -89,9 +94,6 @@ class CharacterCollectionViewCell: UICollectionViewCell {
         nameLabel.text = character.name
      
         imageView.sd_setImage(with: URL(string: character.image), placeholderImage: UIImage(named: "placeholder"))
-        
-//        mainView.backgroundColor = .red
-//        genderLabel.text = "♂︎"
         statusLabel.text = (character.status == "Alive") ? "😀" : "☠️"
         statusLabel.font = .systemFont(ofSize: 15)
         genderLabel.font = .systemFont(ofSize: 20)

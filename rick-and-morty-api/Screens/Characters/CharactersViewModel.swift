@@ -5,21 +5,24 @@
 //  Created by Gonçalo Martins on 25/08/2023.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 class CharactersViewModel {
-    private let apiService = RickAndMortyAPIService()
-    //     var characters: [Character] = []
+    // MARK: - Variables
     
+    private let apiService = RickAndMortyAPIService()
+    var filteredData: [Character] = []
     var onDataUpdated: (() -> Void)?
+    
     var characters: [Character] = [] {
         didSet {
             onDataUpdated?()
         }
     }
-    var filteredData: [Character] = []
-
+    
+    // MARK: - Functions
+    
     func fetchData() {
         apiService.fetchData { result in
             switch result {
@@ -29,5 +32,6 @@ class CharactersViewModel {
             case .failure(let error):
                 print("Error fetching data:", error)
             }
-        }    }
+        }
+    }
 }

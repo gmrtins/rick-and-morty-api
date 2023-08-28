@@ -1,5 +1,5 @@
 //
-//  StatusView.swift
+//  DetailView.swift
 //  rick-and-morty-api
 //
 //  Created by Gonçalo Martins on 28/08/2023.
@@ -9,9 +9,13 @@ import Foundation
 import SnapKit
 import UIKit
 
-class StatusView: UIView {
+class DetailView: UIView {
+    // MARK: - Variables
+    
     private let imageView = UIImageView()
     private let label = UILabel()
+    
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,6 +26,8 @@ class StatusView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    // MARK: - Functions
     
     private func setupSubviews() {
         imageView.contentMode = .scaleAspectFit
@@ -48,7 +54,7 @@ class StatusView: UIView {
             make.horizontalEdges.equalToSuperview().inset(10)
         }
     }
-
+    
     func configure(image: UIImage?, text: String) {
         imageView.image = image
         label.text = text

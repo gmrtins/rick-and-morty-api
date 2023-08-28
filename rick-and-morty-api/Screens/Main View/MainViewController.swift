@@ -24,6 +24,7 @@ class MainViewController: UITabBarController {
         
         tabBar.barTintColor = .gray
         setViewControllers([charactersVC, aboutVC], animated: true)
+        
         let appearance = UITabBarAppearance()
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = tabBar.standardAppearance

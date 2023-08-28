@@ -10,63 +10,14 @@ import Foundation
 class RickAndMortyAPIService {
     private var dataCache: [Int: Character] = [:]
     var pages = 0
-    var cenas = [Character]()
-
-//    func fetchPageNumbers(completion: @escaping (Result<RickAndMortyAPIResponse, Error>) -> Void) {
-//        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
-//            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-//            return
-//        }
-//
-//        URLSession.shared.dataTask(with: url) { (data, response, error) in
-//            if let data = data {
-//                do {
-//                    let apiResponse = try JSONDecoder().decode(RickAndMortyAPIResponse.self, from: data)
-//                    self.total = apiResponse.info.pages
-//                    completion(.success(apiResponse))
-//
-//                } catch {
-//                    completion(.failure(error))
-//                }
-//            } else if let error = error {
-//                completion(.failure(error))
-//            }
-//        }.resume()
-//    }
-//
-//    func fetchData(completion: @escaping (Result<[Character], Error>) -> Void) {
-    //        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
-    //            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
-    //            return
-    //        }
-    //
-    //        URLSession.shared.dataTask(with: url) { (data, response, error) in
-    //            if let data = data {
-    //                do {
-    //                    let apiResponse = try JSONDecoder().decode(RickAndMortyAPIResponse.self, from: data)
-    //                    self.total = apiResponse.info.pages
-    //                    // Cache the characters
-    //                    apiResponse.results.forEach { character in
-    //                        self.dataCache[character.id] = character
-    //                    }
-    //
-    //                    completion(.success(apiResponse.results))
-    //                } catch {
-    //                    completion(.failure(error))
-    //                }
-    //            } else if let error = error {
-    //                completion(.failure(error))
-    //            }
-    //        }.resume()
-    //    }
-    //
-        
+    var characters = [Character]()
+    
     func fetchData(completion: @escaping (Result<[Character], Error>) -> Void) {
         guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
             return
         }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { data, _, error in
             if let data = data {
                 do {
                     let apiResponse = try JSONDecoder().decode(RickAndMortyAPIResponse.self, from: data)
@@ -79,32 +30,27 @@ class RickAndMortyAPIService {
                             return
                         }
                         
-                        URLSession.shared.dataTask(with: url) { (data, response, error) in
-                                    if let data = data {
-                                        do {
-                                            let model = try JSONDecoder().decode(RickAndMortyAPIResponse.self, from: data)
-                                         
-                                            // Cache the characters
-                                            model.results.forEach { character in
-                                                self.cenas.append(character)
-//                                                self.dataCache[character.id] = character
-                                            }
-                        
-                                            completion(.success(self.cenas))
-                                        } catch {
-                                            completion(.failure(error))
-                                        }
-                                    } else if let error = error {
-                                        completion(.failure(error))
+                        URLSession.shared.dataTask(with: url) { data, _, error in
+                            if let data = data {
+                                do {
+                                    let model = try JSONDecoder().decode(RickAndMortyAPIResponse.self, from: data)
+                                    
+                                    model.results.forEach { character in
+                                        self.characters.append(character)
                                     }
-                                }.resume()
-                        
+                                    
+                                    completion(.success(self.characters))
+                                } catch {
+                                    completion(.failure(error))
+                                }
+                            } else if let error = error {
+                                completion(.failure(error))
+                            }
+                        }.resume()
                     }
                     
-                    self.cenas.forEach { c in
+                    self.characters.forEach { c in
                         self.dataCache[c.id] = c
-                        print(c)
-
                     }
                     completion(.success(apiResponse.results))
                 } catch {
@@ -115,12 +61,10 @@ class RickAndMortyAPIService {
             }
         }.resume()
     }
-    
-    
 }
 
 extension Int: Sequence {
     public func makeIterator() -> CountableRange<Int>.Iterator {
-        return (0..<self).makeIterator()
+        return (0 ..< self).makeIterator()
     }
 }
