@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  RickAndMortyAPIService.swift
 //  rick-and-morty-api
 //
 //  Created by Gonçalo Martins on 25/08/2023.
