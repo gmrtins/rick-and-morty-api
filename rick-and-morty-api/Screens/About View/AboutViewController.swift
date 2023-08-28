@@ -58,7 +58,7 @@ class AboutViewController: UIViewController {
     
     private let projectReadme = {
         let label = ClickableLabel()
-        label.linkURL = URL(string: "https://linktr.ee/goncalomartins.dev")
+        label.linkURL = URL(string: "https://github.com/gmrtins/rick-and-morty-api#readme")
         label.textAlignment = .center
         
         let attributedText = NSAttributedString(string: "Project README", attributes: [
