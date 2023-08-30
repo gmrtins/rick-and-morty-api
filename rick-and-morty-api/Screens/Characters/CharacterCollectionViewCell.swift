@@ -103,7 +103,6 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 
         } else if character.gender == "Female" {
             genderLabel.text = "♀︎"
-
         } else {
             genderLabel.text = "⚲"
         }

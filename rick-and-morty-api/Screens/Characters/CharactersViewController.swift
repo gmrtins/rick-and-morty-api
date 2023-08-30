@@ -20,7 +20,7 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         let indicator = UIActivityIndicatorView(style: .large)
         return indicator
     }()
-
+    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Variables
@@ -55,7 +55,11 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
             }
         }
         loadingIndicator.startAnimating()
-        viewModel.fetchData()
+        
+        Task {
+            await viewModel.fetchData()
+        }
+        
     }
     
     // MARK: - Functions
@@ -71,7 +75,7 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         titleLabel.numberOfLines = 2
         
         mainView.addSubview(loadingIndicator)
-
+        
         mainView.addSubview(titleLabel)
         mainView.addSubview(searchBar)
         
@@ -144,6 +148,19 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
         let characterVC = CharacterViewController(character: selected)
         
         navigationController?.pushViewController(characterVC, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        let collectionViewContentSizeHeight = collectionView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
+        
+        if position > (collectionViewContentSizeHeight - 120 - scrollViewHeight) {
+            Task {
+                await viewModel.fetchData()
+                
+            }
+        }
     }
 }
 
