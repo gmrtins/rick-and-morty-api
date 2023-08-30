@@ -12,20 +12,21 @@ import UIKit
 class CharactersViewController: UIViewController, UICollectionViewDelegate {
     // MARK: - UI Elements
     
-    let mainView = UIView()
-    let titleLabel = UILabel()
-    var searchBar = UISearchBar()
+    private let mainView = UIView()
+    private let titleLabel = UILabel()
+    private let searchBar = UISearchBar()
     
-    let loadingIndicator: UIActivityIndicatorView = {
+    private let loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         return indicator
     }()
 
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Variables
     
-    var viewModel: CharactersViewModel
+    private let viewModel: CharactersViewModel
+    private let strings = Strings.CharactersView.self
     
     // MARK: - Initialization
     
@@ -64,7 +65,7 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         
         view.backgroundColor = .systemBackground
         
-        titleLabel.text = "What Rick and Morty caracter are you looking for ?"
+        titleLabel.text = strings.titleLabel
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.font = .boldSystemFont(ofSize: 25)
         titleLabel.numberOfLines = 2
@@ -74,7 +75,7 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         mainView.addSubview(titleLabel)
         mainView.addSubview(searchBar)
         
-        searchBar.placeholder = "e.g Pickle Rick"
+        searchBar.placeholder = strings.searchBarPlaceholder
         searchBar.searchBarStyle = .minimal
     }
     
