@@ -107,6 +107,8 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
     
     func setupCollectionView() {
         collectionView.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier)
+        collectionView.register(NoResultCollectionViewCell.self, forCellWithReuseIdentifier: NoResultCollectionViewCell.reuseIdentifier)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -124,23 +126,33 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
 
 extension CharactersViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.filteredData.count
+        return viewModel.filteredData.isEmpty ? 1 : viewModel.filteredData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier, for: indexPath) as! CharacterCollectionViewCell
-        
-        let character = viewModel.filteredData[indexPath.item]
-        cell.configure(with: character)
-        return cell
+        if viewModel.filteredData.isEmpty {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoResultCollectionViewCell.reuseIdentifier, for: indexPath) as! NoResultCollectionViewCell
+            cell.configure(with: strings.noResultsText)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier, for: indexPath) as! CharacterCollectionViewCell
+            
+            let character = viewModel.filteredData[indexPath.item]
+            cell.configure(with: character)
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewWidth = collectionView.frame.width
-        let cellWidth = collectionViewWidth / 2 - 5
-        
-        let cellHeight: CGFloat = 120
-        return CGSize(width: cellWidth, height: cellHeight)
+        if viewModel.filteredData.isEmpty {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        } else {
+            let collectionViewWidth = collectionView.frame.width
+            let cellWidth = collectionViewWidth / 2 - 5
+            
+            let cellHeight: CGFloat = 120
+            return CGSize(width: cellWidth, height: cellHeight)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

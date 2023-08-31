@@ -27,6 +27,7 @@ struct Strings {
     enum CharactersView {
         static let titleLabel = "What Rick and Morty caracter are you looking for ?"
         static let searchBarPlaceholder = "e.g Pickle Rick"
+        static let noResultsText = "No results"
     }
 
     enum CharacterView {
