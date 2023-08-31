@@ -1,0 +1,25 @@
+/* 
+ Localizable.strings
+ rick-and-morty-api
+ 
+ Created by Gonçalo Martins on 31/08/2023.
+ 
+ */
+
+"mainViewTabBarAboutTabTitle" = "About";
+"mainViewTabBarCharactersTabTitle" = "Characters";
+"aboutViewNameLabel" = "Gonçalo Martins";
+"aboutViewDescriptionLabel" = "Hi, my name is Gonçalo Martins, I'm an iOS developer from Coimbra, Portugal. If you want to know a litle bit more about me and the projects I've worked on, you can click the link bellow";
+"aboutViewReadmeTitle" = "Project README";
+"aboutViewLinktreeTitle" = "Get to know me!";
+"charactersViewTitle" = "What Rick and Morty caracter are you looking for ?";
+"charactersViewSearchBarPlaceholder" = "e.g Pickle Rick";
+"characterViewEpisodesLabel" = "Episodes";
+"characterViewEpisodeLabel" = "Episode";
+"male_gender_text" = "Male";
+"female_gender_text" = "Female";
+"genderless_gender_text" = "Genderless";
+"unknown" = "Unknown";
+"alive" = "Alive";
+"dead" = "Dead";
+"noResultsText" = "No results";

@@ -8,8 +8,9 @@
 import UIKit
 
 class MainViewController: UITabBarController {
-    let charactersVC = CharactersViewController(viewModel: CharactersViewModel())
-    let aboutVC = AboutViewController()
+    private let charactersVC = CharactersViewController(viewModel: CharactersViewModel())
+    private let aboutVC = AboutViewController()
+    private let strings = Strings.MainView.TabBarTitles.self
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class MainViewController: UITabBarController {
     }
         
     func configureTabBar() {
-        tabBar.tintColor = UIColor(hex: "#7cf448")
+        tabBar.tintColor = Colors.tint.color
         
         tabBar.barTintColor = .gray
         setViewControllers([charactersVC, aboutVC], animated: true)
@@ -31,7 +32,7 @@ class MainViewController: UITabBarController {
     }
     
     func configureTabBarItems() {
-        charactersVC.tabBarItem = UITabBarItem(title: "Characters", image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
-        aboutVC.tabBarItem = UITabBarItem(title: "About", image: UIImage(systemName: "info.circle"), selectedImage: UIImage(systemName: "info.circle.fill"))
+        charactersVC.tabBarItem = UITabBarItem(title: strings.characters, image: UIImage(systemName: "person.2"), selectedImage: UIImage(systemName: "person.2.fill"))
+        aboutVC.tabBarItem = UITabBarItem(title: strings.about, image: UIImage(systemName: "info.circle"), selectedImage: UIImage(systemName: "info.circle.fill"))
     }
 }

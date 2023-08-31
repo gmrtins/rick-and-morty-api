@@ -11,13 +11,15 @@ import UIKit
 
 class AboutViewController: UIViewController {
     // MARK: - UI Elements
+
+    let strings = Strings.AboutView.self
     
     private let mainView = UIView()
+    
     private let nameLabel = {
         let label = UILabel()
-        label.text = "Gonçalo Martins"
         label.textAlignment = .center
-        label.textColor = UIColor(named: "textColor")
+        label.textColor = Colors.textColor.color
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -30,13 +32,11 @@ class AboutViewController: UIViewController {
         imageView.layer.cornerRadius = 75
         imageView.layer.borderWidth = 2 // Border width
         imageView.layer.borderColor = UIColor.systemGray.cgColor
-        imageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/49563508?v=4"), placeholderImage: UIImage(named: "placeholder"))
         return imageView
     }()
     
     private let descriptionLabel = {
         let label = UILabel()
-        label.text = "Hi, my name is Gonçalo Martins, I'm an iOS developer from Coimbra, Portugal. If you want to know a litle bit more about me and the projects I've worked on, you can click the link bellow"
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingHead
         return label
@@ -44,35 +44,20 @@ class AboutViewController: UIViewController {
     
     private let linktreeLabel = {
         let label = ClickableLabel()
-        label.linkURL = URL(string: "https://linktr.ee/goncalomartins.dev")
         label.textAlignment = .center
-
-        let attributedText = NSAttributedString(string: "Get to know me!", attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor"),
-            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
-        ])
-        
-        label.attributedText = attributedText
         return label
     }()
     
     private let projectReadme = {
         let label = ClickableLabel()
-        label.linkURL = URL(string: "https://github.com/gmrtins/rick-and-morty-api#readme")
         label.textAlignment = .center
-        
-        let attributedText = NSAttributedString(string: "Project README", attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor"),
-            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
-        ])
-        
-        label.attributedText = attributedText
         return label
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupLabels()
         setupConstraints()
     }
     
@@ -85,8 +70,30 @@ class AboutViewController: UIViewController {
         mainView.addSubview(linktreeLabel)
         mainView.addSubview(projectReadme)
         
-        view.backgroundColor = UIColor(named: "backColor")
-        mainView.backgroundColor = UIColor(named: "backColor")
+        view.backgroundColor = Colors.backgroundColor.color
+        mainView.backgroundColor = Colors.backgroundColor.color
+        iconImageView.sd_setImage(with: URL(string: strings.iconURL), placeholderImage: Images.placeholder.image)
+    }
+    
+    private func setupLabels() {
+        nameLabel.text = strings.nameLabel
+        descriptionLabel.text = strings.descriptionLabel
+        
+        let projectReadmeText = NSAttributedString(string: strings.readmeTitle, attributes: [
+            NSAttributedString.Key.foregroundColor: Colors.textColor.color ?? .systemBackground,
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        
+        projectReadme.attributedText = projectReadmeText
+        projectReadme.linkURL = URL(string: strings.readmeURL)
+        
+        let linktreeText = NSAttributedString(string: strings.linktreeTitle, attributes: [
+            NSAttributedString.Key.foregroundColor: Colors.textColor.color ?? .systemBackground,
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        
+        linktreeLabel.attributedText = linktreeText
+        linktreeLabel.linkURL = URL(string: strings.linktreeURL)
     }
     
     private func setupConstraints() {

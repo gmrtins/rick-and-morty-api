@@ -33,7 +33,7 @@ class DetailView: UIView {
         imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
         
-        label.textColor = UIColor(named: "textColor")
+        label.textColor = Colors.textColor.color
         label.textAlignment = .center
         label.numberOfLines = 2
         imageView.tintColor = label.textColor
