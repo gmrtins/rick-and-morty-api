@@ -27,6 +27,7 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
     
     private let viewModel: CharactersViewModel
     private let strings = Strings.CharactersView.self
+    private var searchTask: DispatchWorkItem?
     
     // MARK: - Initialization
     
@@ -59,7 +60,6 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         Task {
             await viewModel.fetchData()
         }
-        
     }
     
     // MARK: - Functions
@@ -158,7 +158,6 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
         if position > (collectionViewContentSizeHeight - 120 - scrollViewHeight) {
             Task {
                 await viewModel.fetchData()
-                
             }
         }
     }
@@ -168,14 +167,25 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
 
 extension CharactersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            viewModel.filteredData = viewModel.characters
-        } else {
-            viewModel.filteredData = viewModel.characters.filter { item in
-                item.name.lowercased().contains(searchText.lowercased())
+        searchTask?.cancel()
+        
+        let task = DispatchWorkItem { [weak self] in
+            if searchText.isEmpty {
+                self?.viewModel.resetSearch()
+                Task {
+                    await self?.viewModel.fetchData()
+                }
+            } else {
+                Task {
+                    await self?.viewModel.search(searchText.lowercased())
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
             }
         }
-        
-        collectionView.reloadData()
+        searchTask = task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task)
     }
 }

@@ -80,7 +80,7 @@ class AboutViewController: UIViewController {
         descriptionLabel.text = strings.descriptionLabel
         
         let projectReadmeText = NSAttributedString(string: strings.readmeTitle, attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor"),
+            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor") ?? .systemBackground,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
         ])
         
@@ -88,7 +88,7 @@ class AboutViewController: UIViewController {
         projectReadme.linkURL = URL(string: strings.readmeURL)
         
         let linktreeText = NSAttributedString(string: strings.linktreeTitle, attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor"),
+            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor") ?? .systemBackground,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
         ])
         

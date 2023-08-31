@@ -5,8 +5,8 @@
 //  Created by Gonçalo Martins on 30/08/2023.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 class NetworkManager {
     static let shared = NetworkManager()
@@ -14,17 +14,16 @@ class NetworkManager {
     
     private init() {}
     
-        func request<T: Decodable>(
-            url: URL,
-            responseType: T.Type,
-            completion: @escaping (Result<T, NetworkError>) -> Void
-        )
-    {
-        print(url)
+    func request<T: Decodable>(
+        url: URL,
+        responseType: T.Type,
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
         URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { data, response in
                 guard let httpResponse = response as? HTTPURLResponse,
-                      200..<300 ~= httpResponse.statusCode else {
+                      200 ..< 300 ~= httpResponse.statusCode
+                else {
                     throw NetworkError.invalidResponse
                 }
                 return data
@@ -56,19 +55,25 @@ enum NetworkError: Error {
     case other(Error)
 }
 
-struct API {
+enum API {
     static let baseURL = URL(string: "https://rickandmortyapi.com/")!
     static let charactersPath = "api/character"
     
-    static func characterDetail(id: Int) -> URL {
-           return baseURL.appendingPathComponent("\(charactersPath)/\(id)")
-       }
-    
-    static func characters(page: Int) -> URL {        
+    static func characters(page: Int?, name: String?) -> URL {
         var urlComponents = baseURL.appendingPathComponent("\(charactersPath)")
-        urlComponents.append(queryItems: [URLQueryItem(name: "page", value: String(page))])
+        urlComponents.append(queryItems: [URLQueryItem(name: "page", value: String(page ?? 1)), URLQueryItem(name: "name", value: name)])
         
         return urlComponents
     }
+    
+    static func searchCharacters(name: String) -> URL {
+        var urlComponents = baseURL.appendingPathComponent("\(charactersPath)")
+        urlComponents.append(queryItems: [URLQueryItem(name: "name", value: name)])
+        
+        return urlComponents
+    }
+    
+    static func characterDetail(id: Int) -> URL {
+        return baseURL.appendingPathComponent("\(charactersPath)/\(id)")
+    }
 }
-
