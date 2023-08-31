@@ -48,7 +48,7 @@ class CharacterViewController: UIViewController {
         view.addSubview(mainView)
         
         imageView.sd_setImage(with: URL(string: character.image), placeholderImage: Images.placeholder.image)
-        mainView.backgroundColor = UIColor(named: "backColor")
+        mainView.backgroundColor = Colors.backgroundColor.color
         
         nameLabel.text = character.name
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
@@ -57,7 +57,7 @@ class CharacterViewController: UIViewController {
         
         labelsView.layer.cornerRadius = 20
         labelsView.clipsToBounds = true
-        labelsView.backgroundColor = UIColor(named: "backColor")
+        labelsView.backgroundColor = Colors.backgroundColor.color
         
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually

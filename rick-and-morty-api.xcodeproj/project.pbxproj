@@ -17,6 +17,7 @@
 		548BFBFF2A9F651E006734BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548BFBFE2A9F651E006734BF /* NetworkManager.swift */; };
 		548BFC112AA0A37D006734BF /* NoResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548BFC102AA0A37D006734BF /* NoResultCollectionViewCell.swift */; };
 		54AB64FC2AA0E8210086C269 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AB64FB2AA0E8210086C269 /* Images.swift */; };
+		54AB64FE2AA0EB5C0086C269 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AB64FD2AA0EB5C0086C269 /* Colors.swift */; };
 		54ABFA292A97622C00A29A83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABFA282A97622C00A29A83 /* AppDelegate.swift */; };
 		54ABFA2B2A97622C00A29A83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABFA2A2A97622C00A29A83 /* SceneDelegate.swift */; };
 		54ABFA2D2A97622C00A29A83 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABFA2C2A97622C00A29A83 /* MainViewController.swift */; };
@@ -38,6 +39,7 @@
 		548BFBFE2A9F651E006734BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		548BFC102AA0A37D006734BF /* NoResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		54AB64FB2AA0E8210086C269 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		54AB64FD2AA0EB5C0086C269 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		54ABFA252A97622C00A29A83 /* rick-and-morty-api.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rick-and-morty-api.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54ABFA282A97622C00A29A83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54ABFA2A2A97622C00A29A83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				54ABFA332A97622D00A29A83 /* LaunchScreen.storyboard */,
 				548BFBFC2A9F53B5006734BF /* Strings.swift */,
 				54AB64FB2AA0E8210086C269 /* Images.swift */,
+				54AB64FD2AA0EB5C0086C269 /* Colors.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				543164F12A98FA12002215D5 /* CharactersViewModel.swift in Sources */,
 				54B4C76F2A98DE9600E91732 /* CharacterViewController.swift in Sources */,
 				54E90E8C2A9CBEC300836E70 /* DetailView.swift in Sources */,
+				54AB64FE2AA0EB5C0086C269 /* Colors.swift in Sources */,
 				5411C0AE2A97B85100A86A6A /* CharacterCollectionViewCell.swift in Sources */,
 				54ABFA2D2A97622C00A29A83 /* MainViewController.swift in Sources */,
 				548BFBFD2A9F53B5006734BF /* Strings.swift in Sources */,

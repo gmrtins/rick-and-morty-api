@@ -23,7 +23,7 @@ class NoResultCollectionViewCell: UICollectionViewCell {
         addSubviews()
         setupConstraints()
         noResultLabel.adjustsFontSizeToFitWidth = true
-        noResultLabel.textColor = UIColor(named: "textColor")
+        noResultLabel.textColor = Colors.textColor.color
     }
     
     @available(*, unavailable)
