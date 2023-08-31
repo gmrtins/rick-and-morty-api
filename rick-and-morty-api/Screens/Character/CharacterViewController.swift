@@ -41,6 +41,7 @@ class CharacterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        configureDetailsView()
         setupConstraints()
     }
     
@@ -70,19 +71,13 @@ class CharacterViewController: UIViewController {
         stackView2.alignment = .fill
         stackView2.spacing = 0
         
-        episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodesLabel)")
-        
-        genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: "\(character.gender)")
-        
-        originView.configure(image: Images.origin.image?.withRenderingMode(.alwaysTemplate), text: "\(character.origin.name)")
-        
-        statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: "\(character.status)")
-        
         mainView.addSubview(imageView)
         mainView.addSubview(labelsView)
+        
         labelsView.addSubview(nameLabel)
         labelsView.addSubview(genderLabel)
         labelsView.addSubview(mainStackView)
+        
         mainStackView.addArrangedSubview(stackView1)
         mainStackView.addArrangedSubview(stackView2)
         
@@ -93,6 +88,38 @@ class CharacterViewController: UIViewController {
         stackView2.addArrangedSubview(statusView)
     }
     
+    private func configureDetailsView() {
+        if character.episode.count > 1 {
+            episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodesLabel)")
+        } else {
+            episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodeLabel)")
+        }
+            
+        switch character.gender {
+        case "Male":
+            genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: strings.maleText)
+        case "Female":
+            genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: strings.femaleText)
+        default:
+            genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: strings.genderlessText)
+        }
+            
+        if character.origin.name == "unknown" {
+            originView.configure(image: Images.origin.image?.withRenderingMode(.alwaysTemplate), text: strings.unknown)
+        } else {
+            originView.configure(image: Images.origin.image?.withRenderingMode(.alwaysTemplate), text: "\(character.origin.name)")
+        }
+            
+        switch character.status {
+        case "Dead":
+            statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: strings.dead)
+        case "Alive":
+            statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: strings.alive)
+        default:
+            statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: strings.unknown)
+        }
+    }
+
     private func setupConstraints() {
         mainView.snp.makeConstraints { make in
             make.top.bottom.trailing.leading.equalToSuperview()

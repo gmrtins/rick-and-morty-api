@@ -1,0 +1,25 @@
+/* 
+ Localizable.strings
+ rick-and-morty-api
+ 
+ Created by Gonçalo Martins on 31/08/2023.
+ 
+ */
+
+"mainViewTabBarAboutTabTitle" = "Acerca";
+"mainViewTabBarCharactersTabTitle" = "Personajes";
+"aboutViewNameLabel" = "Gonçalo Martins";
+"aboutViewDescriptionLabel" = "Hola, mi nombre es Gonçalo Martins, soy un desarrollador de iOS de Coimbra, Portugal. Si quieres saber un poco más sobre mí y los proyectos en los que he trabajado, puedes hacer clic en el enlace abajo.";
+"aboutViewReadmeTitle" = "README del proyecto";
+"aboutViewLinktreeTitle" = "Conóceme!";
+"charactersViewTitle" = "¿Qué personaje de Rick y Morty estás buscando?";
+"charactersViewSearchBarPlaceholder" = "ej. Pickle Rick";
+"characterViewEpisodesLabel" = "Episodios";
+"characterViewEpisodeLabel" = "Episodio";
+"male_gender_text" = "Hombre";
+"female_gender_text" = "Mujer";
+"genderless_gender_text" = "Sin género";
+"unknown" = "Deconocido";
+"alive" = "Vivo";
+"dead" = "Muerto";
+"noResultsText" = "Sin resultados";
