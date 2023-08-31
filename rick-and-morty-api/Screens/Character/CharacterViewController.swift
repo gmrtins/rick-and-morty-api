@@ -22,19 +22,20 @@ class CharacterViewController: UIViewController {
     private let statusLabel = UILabel()
     private let typeLabel = UILabel()
     
-    let mainStackView = UIStackView()
-    let stackView1 = UIStackView()
-    let stackView2 = UIStackView()
+    private let mainStackView = UIStackView()
+    private let stackView1 = UIStackView()
+    private let stackView2 = UIStackView()
     
-    let episodesView = DetailView()
-    let genderView = DetailView()
-    let originView = DetailView()
-    let statusView = DetailView()
+    private let episodesView = DetailView()
+    private let genderView = DetailView()
+    private let originView = DetailView()
+    private let statusView = DetailView()
     
     // MARK: - Variables
 
     private var character: Character
-
+    private let strings = Strings.CharacterView.self
+    
     // MARK: - Functons
     
     override func viewDidLoad() {
@@ -46,9 +47,8 @@ class CharacterViewController: UIViewController {
     private func setupView() {
         view.addSubview(mainView)
         
-        imageView.sd_setImage(with: URL(string: character.image), placeholderImage: UIImage(named: "placeholder"))
-        
-        mainView.backgroundColor = UIColor(named: "backColor")
+        imageView.sd_setImage(with: URL(string: character.image), placeholderImage: Images.placeholder.image)
+        mainView.backgroundColor = Colors.backgroundColor.color
         
         nameLabel.text = character.name
         nameLabel.font = .preferredFont(forTextStyle: .largeTitle)
@@ -57,7 +57,7 @@ class CharacterViewController: UIViewController {
         
         labelsView.layer.cornerRadius = 20
         labelsView.clipsToBounds = true
-        labelsView.backgroundColor = UIColor(named: "backColor")
+        labelsView.backgroundColor = Colors.backgroundColor.color
         
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
@@ -70,13 +70,13 @@ class CharacterViewController: UIViewController {
         stackView2.alignment = .fill
         stackView2.spacing = 0
         
-        episodesView.configure(image: UIImage(named: "tv")?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) Episodes")
+        episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodesLabel)")
         
-        genderView.configure(image: UIImage(named: "gender")?.withRenderingMode(.alwaysTemplate), text: "\(character.gender)")
+        genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: "\(character.gender)")
         
-        originView.configure(image: UIImage(named: "origin")?.withRenderingMode(.alwaysTemplate), text: "\(character.origin.name)")
+        originView.configure(image: Images.origin.image?.withRenderingMode(.alwaysTemplate), text: "\(character.origin.name)")
         
-        statusView.configure(image: UIImage(named: "status")?.withRenderingMode(.alwaysTemplate), text: "\(character.status)")
+        statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: "\(character.status)")
         
         mainView.addSubview(imageView)
         mainView.addSubview(labelsView)
