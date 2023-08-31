@@ -93,7 +93,7 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     func configure(with character: Character) {
         nameLabel.text = character.name
      
-        imageView.sd_setImage(with: URL(string: character.image), placeholderImage: UIImage(named: "placeholder"))
+        imageView.sd_setImage(with: URL(string: character.image), placeholderImage: Images.placeholder.image)
         statusLabel.text = (character.status == "Alive") ? "😀" : "☠️"
         statusLabel.font = .systemFont(ofSize: 15)
         genderLabel.font = .systemFont(ofSize: 20)

@@ -32,7 +32,6 @@ class AboutViewController: UIViewController {
         imageView.layer.cornerRadius = 75
         imageView.layer.borderWidth = 2 // Border width
         imageView.layer.borderColor = UIColor.systemGray.cgColor
-        imageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/49563508?v=4"), placeholderImage: UIImage(named: "placeholder"))
         return imageView
     }()
     
@@ -73,6 +72,8 @@ class AboutViewController: UIViewController {
         
         view.backgroundColor = UIColor(named: "backColor")
         mainView.backgroundColor = UIColor(named: "backColor")
+        iconImageView.sd_setImage(with: URL(string: strings.iconURL), placeholderImage: Images.placeholder.image)
+
     }
     
     private func setupLabels() {
