@@ -21,7 +21,7 @@ class MainViewController: UITabBarController {
     }
         
     func configureTabBar() {
-        tabBar.tintColor = UIColor(hex: "#7cf448")
+        tabBar.tintColor = Colors.tint.color
         
         tabBar.barTintColor = .gray
         setViewControllers([charactersVC, aboutVC], animated: true)

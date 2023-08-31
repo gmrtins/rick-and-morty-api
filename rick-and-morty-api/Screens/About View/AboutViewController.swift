@@ -19,7 +19,7 @@ class AboutViewController: UIViewController {
     private let nameLabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = UIColor(named: "textColor")
+        label.textColor = Colors.textColor.color
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -32,7 +32,6 @@ class AboutViewController: UIViewController {
         imageView.layer.cornerRadius = 75
         imageView.layer.borderWidth = 2 // Border width
         imageView.layer.borderColor = UIColor.systemGray.cgColor
-        imageView.sd_setImage(with: URL(string: "https://avatars.githubusercontent.com/u/49563508?v=4"), placeholderImage: UIImage(named: "placeholder"))
         return imageView
     }()
     
@@ -71,8 +70,9 @@ class AboutViewController: UIViewController {
         mainView.addSubview(linktreeLabel)
         mainView.addSubview(projectReadme)
         
-        view.backgroundColor = UIColor(named: "backColor")
-        mainView.backgroundColor = UIColor(named: "backColor")
+        view.backgroundColor = Colors.backgroundColor.color
+        mainView.backgroundColor = Colors.backgroundColor.color
+        iconImageView.sd_setImage(with: URL(string: strings.iconURL), placeholderImage: Images.placeholder.image)
     }
     
     private func setupLabels() {
@@ -80,7 +80,7 @@ class AboutViewController: UIViewController {
         descriptionLabel.text = strings.descriptionLabel
         
         let projectReadmeText = NSAttributedString(string: strings.readmeTitle, attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor"),
+            NSAttributedString.Key.foregroundColor: Colors.textColor.color ?? .systemBackground,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
         ])
         
@@ -88,7 +88,7 @@ class AboutViewController: UIViewController {
         projectReadme.linkURL = URL(string: strings.readmeURL)
         
         let linktreeText = NSAttributedString(string: strings.linktreeTitle, attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "textColor"),
+            NSAttributedString.Key.foregroundColor: Colors.textColor.color ?? .systemBackground,
             NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
         ])
         

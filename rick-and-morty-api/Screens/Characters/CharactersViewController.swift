@@ -20,13 +20,14 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         let indicator = UIActivityIndicatorView(style: .large)
         return indicator
     }()
-
+    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     // MARK: - Variables
     
     private let viewModel: CharactersViewModel
     private let strings = Strings.CharactersView.self
+    private var searchTask: DispatchWorkItem?
     
     // MARK: - Initialization
     
@@ -55,7 +56,10 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
             }
         }
         loadingIndicator.startAnimating()
-        viewModel.fetchData()
+        
+        Task {
+            await viewModel.fetchData()
+        }
     }
     
     // MARK: - Functions
@@ -71,7 +75,7 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
         titleLabel.numberOfLines = 2
         
         mainView.addSubview(loadingIndicator)
-
+        
         mainView.addSubview(titleLabel)
         mainView.addSubview(searchBar)
         
@@ -103,6 +107,8 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
     
     func setupCollectionView() {
         collectionView.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier)
+        collectionView.register(NoResultCollectionViewCell.self, forCellWithReuseIdentifier: NoResultCollectionViewCell.reuseIdentifier)
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -120,23 +126,33 @@ class CharactersViewController: UIViewController, UICollectionViewDelegate {
 
 extension CharactersViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.filteredData.count
+        return viewModel.filteredData.isEmpty ? 1 : viewModel.filteredData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier, for: indexPath) as! CharacterCollectionViewCell
-        
-        let character = viewModel.filteredData[indexPath.item]
-        cell.configure(with: character)
-        return cell
+        if viewModel.filteredData.isEmpty {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoResultCollectionViewCell.reuseIdentifier, for: indexPath) as! NoResultCollectionViewCell
+            cell.configure(with: strings.noResultsText)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier, for: indexPath) as! CharacterCollectionViewCell
+            
+            let character = viewModel.filteredData[indexPath.item]
+            cell.configure(with: character)
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let collectionViewWidth = collectionView.frame.width
-        let cellWidth = collectionViewWidth / 2 - 5
-        
-        let cellHeight: CGFloat = 120
-        return CGSize(width: cellWidth, height: cellHeight)
+        if viewModel.filteredData.isEmpty {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        } else {
+            let collectionViewWidth = collectionView.frame.width
+            let cellWidth = collectionViewWidth / 2 - 5
+            
+            let cellHeight: CGFloat = 120
+            return CGSize(width: cellWidth, height: cellHeight)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -145,20 +161,43 @@ extension CharactersViewController: UICollectionViewDataSource, UICollectionView
         
         navigationController?.pushViewController(characterVC, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        let collectionViewContentSizeHeight = collectionView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
+        
+        if position > (collectionViewContentSizeHeight - 120 - scrollViewHeight) {
+            Task {
+                await viewModel.fetchData()
+            }
+        }
+    }
 }
 
 // MARK: - SearchBar Delegates
 
 extension CharactersViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            viewModel.filteredData = viewModel.characters
-        } else {
-            viewModel.filteredData = viewModel.characters.filter { item in
-                item.name.lowercased().contains(searchText.lowercased())
+        searchTask?.cancel()
+        
+        let task = DispatchWorkItem { [weak self] in
+            if searchText.isEmpty {
+                self?.viewModel.resetSearch()
+                Task {
+                    await self?.viewModel.fetchData()
+                }
+            } else {
+                Task {
+                    await self?.viewModel.search(searchText.lowercased())
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
             }
         }
-        
-        collectionView.reloadData()
+        searchTask = task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task)
     }
 }
