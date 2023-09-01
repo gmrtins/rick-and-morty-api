@@ -30,8 +30,7 @@ class CharactersViewModel {
     
     func fetchData() async {
         if keepLoading {
-            let url = API.characters(page: currentPage, name: queryName)
-            
+            let url = API().characters(page: currentPage, name: queryName)
             NetworkManager.shared.request(url: url, responseType: RickAndMortyAPIResponse.self) { result in
                 switch result {
                 case .success(let response):
