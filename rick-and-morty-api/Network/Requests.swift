@@ -19,6 +19,7 @@ protocol APIProtocol {
 struct API: APIProtocol {
     let baseURL = URL(string: "https://rickandmortyapi.com/")!
     let charactersPath = "api/character"
+    let episodesPath = "api/episode"
     
     func characters(page: Int?, name: String?) -> URL {
         var urlComponents = baseURL.appendingPathComponent(charactersPath)
@@ -36,5 +37,9 @@ struct API: APIProtocol {
     
     func characterDetail(id: Int) -> URL {
         return baseURL.appendingPathComponent("\(charactersPath)/\(id)")
+    }
+    
+    func episodes(ids: String) -> URL {
+        return baseURL.appendingPathComponent("\(episodesPath)/\(ids)")
     }
 }

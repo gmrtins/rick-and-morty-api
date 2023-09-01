@@ -14,6 +14,8 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 
     static let reuseIdentifier: String = "CharacterCollectionViewCell"
     
+    // MARK: - UI Elements
+
     private let mainView = UIView()
     private let nameLabel = UILabel()
     private let imageView = UIImageView()

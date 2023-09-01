@@ -55,8 +55,17 @@ class DetailView: UIView {
         }
     }
     
-    func configure(image: UIImage?, text: String) {
+    func configure(image: UIImage?, text: String, isTextUnderline: Bool = false) {
         imageView.image = image
-        label.text = text
+        
+        if isTextUnderline {
+            let attributedText = NSAttributedString(string: text, attributes: [
+                NSAttributedString.Key.foregroundColor: Colors.textColor.color ?? .systemBackground,
+                NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+            ])
+            label.attributedText = attributedText
+        } else {
+            label.text = text
+        }
     }
 }

@@ -31,6 +31,9 @@
 		54E90E8F2A9CD86700836E70 /* ClickableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E90E8E2A9CD86700836E70 /* ClickableLabel.swift */; };
 		54EFFA022AA1F13400FEEB07 /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFFA012AA1F13400FEEB07 /* NetworkManagerProtocol.swift */; };
 		54EFFA042AA1F1EB00FEEB07 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFFA032AA1F1EB00FEEB07 /* Requests.swift */; };
+		54EFFA062AA221A600FEEB07 /* EpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFFA052AA221A600FEEB07 /* EpisodesViewController.swift */; };
+		54EFFA082AA221B000FEEB07 /* EpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFFA072AA221B000FEEB07 /* EpisodesViewModel.swift */; };
+		54EFFA0A2AA228D600FEEB07 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EFFA092AA228D600FEEB07 /* EpisodeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +63,9 @@
 		54E90E8E2A9CD86700836E70 /* ClickableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableLabel.swift; sourceTree = "<group>"; };
 		54EFFA012AA1F13400FEEB07 /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		54EFFA032AA1F1EB00FEEB07 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		54EFFA052AA221A600FEEB07 /* EpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewController.swift; sourceTree = "<group>"; };
+		54EFFA072AA221B000FEEB07 /* EpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewModel.swift; sourceTree = "<group>"; };
+		54EFFA092AA228D600FEEB07 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,7 @@
 			children = (
 				54B4C76E2A98DE9600E91732 /* CharacterViewController.swift */,
 				54E90E8B2A9CBEC300836E70 /* DetailView.swift */,
+				54EFFA0B2AA22C2F00FEEB07 /* EpisodesView */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -191,6 +198,24 @@
 				54EFFA032AA1F1EB00FEEB07 /* Requests.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		54EFFA0B2AA22C2F00FEEB07 /* EpisodesView */ = {
+			isa = PBXGroup;
+			children = (
+				54EFFA052AA221A600FEEB07 /* EpisodesViewController.swift */,
+				54EFFA072AA221B000FEEB07 /* EpisodesViewModel.swift */,
+				54EFFA0C2AA22C3700FEEB07 /* Cell */,
+			);
+			path = EpisodesView;
+			sourceTree = "<group>";
+		};
+		54EFFA0C2AA22C3700FEEB07 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				54EFFA092AA228D600FEEB07 /* EpisodeTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,15 +309,18 @@
 				548BFC112AA0A37D006734BF /* NoResultCollectionViewCell.swift in Sources */,
 				5411C09F2A979CF500A86A6A /* UIColor+Extensions.swift in Sources */,
 				54ABFA3D2A97635100A29A83 /* APIResponse.swift in Sources */,
+				54EFFA062AA221A600FEEB07 /* EpisodesViewController.swift in Sources */,
 				54EFFA022AA1F13400FEEB07 /* NetworkManagerProtocol.swift in Sources */,
 				5411C0A32A979F1600A86A6A /* AboutViewController.swift in Sources */,
 				54EFFA042AA1F1EB00FEEB07 /* Requests.swift in Sources */,
 				54E90E8F2A9CD86700836E70 /* ClickableLabel.swift in Sources */,
 				54ABFA292A97622C00A29A83 /* AppDelegate.swift in Sources */,
 				548BFBFF2A9F651E006734BF /* NetworkManager.swift in Sources */,
+				54EFFA0A2AA228D600FEEB07 /* EpisodeTableViewCell.swift in Sources */,
 				54AB64FC2AA0E8210086C269 /* Images.swift in Sources */,
 				54ABFA3F2A977D2400A29A83 /* CharactersViewController.swift in Sources */,
 				54ABFA2B2A97622C00A29A83 /* SceneDelegate.swift in Sources */,
+				54EFFA082AA221B000FEEB07 /* EpisodesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ class CharacterViewController: UIViewController {
     private let mainView = UIView()
     private let labelsView = UIView()
     private let imageView = UIImageView()
-
+    
     private let nameLabel = UILabel()
     private let genderLabel = UILabel()
     private let statusLabel = UILabel()
@@ -31,8 +31,10 @@ class CharacterViewController: UIViewController {
     private let originView = DetailView()
     private let statusView = DetailView()
     
+    private let episodesBtn = UIButton()
+    
     // MARK: - Variables
-
+    
     private var character: Character
     private let strings = Strings.CharacterView.self
     
@@ -81,6 +83,8 @@ class CharacterViewController: UIViewController {
         mainStackView.addArrangedSubview(stackView1)
         mainStackView.addArrangedSubview(stackView2)
         
+        episodesView.addSubview(episodesBtn)
+
         stackView1.addArrangedSubview(episodesView)
         stackView1.addArrangedSubview(genderView)
         
@@ -90,11 +94,11 @@ class CharacterViewController: UIViewController {
     
     private func configureDetailsView() {
         if character.episode.count > 1 {
-            episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodesLabel)")
+            episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodesLabel)", isTextUnderline: true)
         } else {
-            episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodeLabel)")
+            episodesView.configure(image: Images.tv.image?.withRenderingMode(.alwaysTemplate), text: "\(character.episode.count) \(strings.episodeLabel)", isTextUnderline: true)
         }
-            
+        
         switch character.gender {
         case "Male":
             genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: strings.maleText)
@@ -103,13 +107,13 @@ class CharacterViewController: UIViewController {
         default:
             genderView.configure(image: Images.gender.image?.withRenderingMode(.alwaysTemplate), text: strings.genderlessText)
         }
-            
+        
         if character.origin.name == "unknown" {
             originView.configure(image: Images.origin.image?.withRenderingMode(.alwaysTemplate), text: strings.unknown)
         } else {
             originView.configure(image: Images.origin.image?.withRenderingMode(.alwaysTemplate), text: "\(character.origin.name)")
         }
-            
+        
         switch character.status {
         case "Dead":
             statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: strings.dead)
@@ -118,6 +122,13 @@ class CharacterViewController: UIViewController {
         default:
             statusView.configure(image: Images.status.image?.withRenderingMode(.alwaysTemplate), text: strings.unknown)
         }
+        
+        episodesBtn.addTarget(self, action: #selector(goToEpisodes), for: .touchUpInside)
+    }
+    
+    @objc private func goToEpisodes() {
+        let episodesVC = EpisodesViewController(episodes: character.episode)
+        navigationController?.pushViewController(episodesVC, animated: true)
     }
 
     private func setupConstraints() {
@@ -144,6 +155,10 @@ class CharacterViewController: UIViewController {
             make.top.equalTo(nameLabel.snp.bottom)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(mainStackView.snp.width)
+        }
+        
+        episodesBtn.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
     }
     
